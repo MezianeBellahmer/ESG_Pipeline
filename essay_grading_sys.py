@@ -1,5 +1,8 @@
 import sys
-from utils import *
+# insert at 1, 0 is the script path (or '' in REPL)
+sys.path.insert(1, '../')
+#import file
+from src import *
 import language_check
 
 
@@ -7,14 +10,18 @@ def main():
     file = open(sys.argv[1], 'r')
     text = file.read()
     file.close()
+    print('Read Essay: ', text)
 
     file = open(sys.argv[2], 'r')
     prompt = file.read()
     file.close()
+    print('\n\n read Prompt :', prompt)
 
     df = pd.DataFrame(
         {'essay': text, 'Prompt': prompt}
     )
+    
+    print(df)
 
     tool = language_check.LanguageTool('en-US')
     df['matches'] = df['essay'].apply(lambda txt: tool.check(txt))
@@ -37,12 +44,12 @@ def main():
     df['Subjectivity'] = subjectivity(df, 'corrected')
 
     df['Avg_tree_height'] = avg_tree_height(df, 'corrected')
-
-    feature = 'sents'
-    # embedding = BERT_Embedding(training_data_set.iloc[:2,:], feature)
+    
     df['inner_similarities'] = essay_similarity(df, 'sents')
 
     df = text_coherence_DF(df, text_column_name='essay')
+    
+    print(df)
 
 
 if __name__ == "__main__":
