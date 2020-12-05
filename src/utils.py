@@ -19,6 +19,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from tensorflow.keras import Sequential
 from tensorflow.keras.layers import Dense
+from readability import Readability
 import numpy as np  # linear algebra
 import pandas as pd  # data processing, CSV file I/O (e.g. pd.read_csv)
 import matplotlib.pyplot as plt
@@ -28,6 +29,7 @@ import nltk
 import warnings
 import gensim
 import torch
+import string
 import gensim.corpora as corpora
 from nltk.corpus import stopwords
 from gensim.utils import simple_preprocess

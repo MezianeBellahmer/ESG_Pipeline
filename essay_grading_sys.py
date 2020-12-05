@@ -1,7 +1,4 @@
 import sys
-# insert at 1, 0 is the script path (or '' in REPL)
-sys.path.insert(1, '../')
-#import file
 from src import *
 import language_check
 
@@ -10,18 +7,16 @@ def main():
     file = open(sys.argv[1], 'r')
     text = file.read()
     file.close()
-    print('Read Essay: ', text)
+   
 
     file = open(sys.argv[2], 'r')
     prompt = file.read()
     file.close()
-    print('\n\n read Prompt :', prompt)
+  
 
-    df = pd.DataFrame(
-        {'essay': text, 'Prompt': prompt}
-    )
-    
-    print(df)
+    df = pd.DataFrame()
+    df['essay'] = [text]
+    df['Prompt'] = [prompt]
 
     tool = language_check.LanguageTool('en-US')
     df['matches'] = df['essay'].apply(lambda txt: tool.check(txt))
