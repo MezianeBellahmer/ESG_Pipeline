@@ -34,7 +34,7 @@ import gensim.corpora as corpora
 from nltk.corpus import stopwords
 from gensim.utils import simple_preprocess
 
-nltk.download('stopwords')
+#nltk.download('stopwords')
 nlp = spacy.load('en_core_web_sm')
 stop_words = stopwords.words('english')
 
